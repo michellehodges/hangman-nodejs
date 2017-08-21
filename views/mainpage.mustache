@@ -6,7 +6,9 @@
     <h1>Hey {{ username }}! Here's your challenge. You have {{ tries }} tries left.</h1>
 
     <div class ="container">
-    <span>{{ underscores }}</span>
+      {{ #underscores }}
+        <span>{{ . }}</span>
+      {{ /underscores }}
     </div>
 
     <form method="post" action="/guess">
