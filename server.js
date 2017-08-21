@@ -1,16 +1,3 @@
-//What do we need to do?
-//1. GET request for '/'. render the page 'main.mustache' with homepage.
-//  - get one word with this command: const words = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");.
-//  - SPLIT and store said word in an empty array. ["a", "b", "c"]
-//  - count word.length
-//  - print out "_" which is equal to in number to word.length
-//2. Under 'main.mustache', create a form. There should be a text input area for one word. Create a 'make a guess' button as well.
-//3. POST request for '/guess' -- under this :
-//  - validate to make sure only one letter is sent
-//  - if input is more than one letter, tell them input is invalid and try again (ERR). render the page.
-//  - if input.length === 1, change letter to toLowercase().
-//  - loop through the array of words and if input ==== any member of the array, then print input to the index number of guesses (_____).
-
 //Dependencies
 const express = require('express');
 const mustache = require('mustache-express');
@@ -25,7 +12,8 @@ const users = [
   { username: "maria", score: 20, tries: 8 }
 ]
 
-const guessedLetters = [];
+const randomWordSplit = [];
+const randomWordUnderscores = [];
 let words = null;
 let hiddenWord = null;
 
@@ -54,7 +42,7 @@ server.get('/play', function(request, response) {
       username: request.session.who.username,
       score: request.session.who.score,
       tries: request.session.who.tries,
-      // previousGuess: previousGuess
+      guessedLetters: request.session.who.guesses,
       // level: request.session.who.level,
     });
   } else {
@@ -73,36 +61,55 @@ server.post('/', function(request, response) {
 
 server.post('/start', function(request, response) {
   const username = request.body.newUsername;
-
   if (username !== null) {
     let user = {
       username: request.body.newUsername,
       score: 0,
-      tries: 8
+      tries: 8,
+      guessedLetters: [''],
     };
-
     users.push(user);
-
     request.session.who = user;
     response.redirect('/play')
   } else {
     response.redirect('/')
   }
-
+  //choose a random word
   words = filesystem.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n")
-
   request.session.who.randomWord = words[Math.floor(Math.random()*words.length)];
 
+  //split the random word into an array of characters
+  randomWordSplit = request.session.who.randomWord.split('');
+
+  //print out underscores with randomword.split.length
+  randomWordUnderscores = Array(randomWordSplit.length).join('_ ')
+
+  console.log(randomWordSplit);
+  console.log(randomWordUnderscores);
   console.log(request.session.who.randomWord);
   console.log(users)
 
 })
 
 server.post('/guess', function(request, response) {
-  if (request.session.who.tries > 1) {
+  if ((request.session.who.tries > 1) && (request.body.guess !== '')) {
+    //1. Decrease the number of tries
     request.session.who.tries -= 1;
+    //3. Check If request.body.guess exists under randomWordSplit,
+    if (randomWordSplit.indexOf(request.body.guess) !== -1) {
+      guessedLetters.push(request.body.guess);
+      //replace randomWordUnderscores (with matching index number as randomWordSplit[i]) with request.body.guess
+      //add 10 to scores
+    } else {
+      response.redirect('/play')
+    }
+
     response.redirect('/play');
+    console.log('Guessed letter array: ' + guessedLetters)
     console.log (request.session.who.tries);
+
+  } else if (request.body.guess === '') {
+    response.redirect('/play');
 
   } else {
     request.session.destroy();

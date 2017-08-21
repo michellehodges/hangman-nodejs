@@ -5,23 +5,25 @@
   <body>
     <h1>Hey {{ username }}! Here's your challenge. You have {{ tries }} tries left.</h1>
 
-    <span class="container"></span>
+    <div class ="container">
+    <span>{{ underscores }}</span>
+    </div>
 
     <form method="post" action="/guess">
-      <input type="text" name="input" placeholder="Guess here!">
+      <input type="text" name="guess" placeholder="Guess here!">
       <input type="submit" value="Make a guess!">
     </form>
 
 
 <!-- SIMILAR TO MESSAGES FROM TWEETERCLONE -->
     <h3>List of guesses:</h3>
-    <ul>
-      {{ #guesses }}
+    <ol>
+      {{ #guessedLetters }}
       <li>
-        <span>{{ previousGuess }}</span>
+        <span>{{ guesses }}</span>
       </li>
-      {{ /guesses }}
-    </ul>
+      {{ /guessedLetters }}
+    </ol>
 
     <h3>Current score: {{ score }}</h3>
 
