@@ -79,6 +79,8 @@ server.post('/start', function(request, response) {
     randomWordUnderscores = Array(randomWordSplit.length+1).join('_').split('');
     request.session.who.underscores = randomWordUnderscores;
 
+    console.log(randomWordSplit);
+
     response.redirect('/play')
     } else {
       response.redirect('/')
@@ -86,18 +88,21 @@ server.post('/start', function(request, response) {
 })
 
 server.post('/guess', function(request, response) {
-  if ((request.session.who.tries > 1) && (request.body.guess !== '')) {
+  let lowercaseGuess = request.body.guess.toLowerCase();
+
+  if ((request.session.who.tries > 1) && (lowercaseGuess !== '')) {
     request.session.who.tries -= 1;
-    request.session.who.guessedLetters.push(request.body.guess);
+    request.session.who.guessedLetters.push(lowercaseGuess);
 
-    if (randomWordSplit.indexOf(request.body.guess) !== -1) {
+    console.log(request.session.who.guessedLetters)
+    if (randomWordSplit.indexOf(lowercaseGuess) !== -1) {
+      request.session.who.score += 10;
 
-      //replace randomWordUnderscores (with matching index number as randomWordSplit[i]) with request.body.guess
-      //add 10 to scores
+      let index = randomWordSplit.indexOf(lowercaseGuess);
+      request.session.who.underscores[index] = randomWordSplit[index];
     }
 
     response.redirect('/play');
-    console.log('Guessed letter array: ' + request.session.who.guessedLetters)
 
   } else if (request.body.guess === '') {
     response.redirect('/play');
@@ -112,3 +117,12 @@ server.post('/guess', function(request, response) {
 server.listen(3000, function() {
    console.log("Server is runnin!");
 })
+
+
+// TODO: ISSUES
+// 1a. need to set everything to lowercase
+// 1) multiples of letters do not populate
+// 2) when word is complete it doesnt automatically redirect
+// 3) game mustache doesnt show scores
+// 4) scoreboard needs to populate
+// 5) need to connect css
