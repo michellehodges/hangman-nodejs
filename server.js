@@ -55,6 +55,10 @@ server.get('/gameover', function(request, response) {
   response.render('gameover');
 })
 
+server.get('/youwin', function(request, response) {
+  response.render('youwin')
+})
+
 //POST requests
 server.post('/', function(request, response) {
   response.redirect('/');
@@ -94,15 +98,18 @@ server.post('/guess', function(request, response) {
     request.session.who.tries -= 1;
     request.session.who.guessedLetters.push(lowercaseGuess);
 
-    console.log(request.session.who.guessedLetters)
-    if (randomWordSplit.indexOf(lowercaseGuess) !== -1) {
+    while (randomWordSplit.indexOf(lowercaseGuess) !== -1 && request.session.who.underscores.indexOf('_') > -1) {
       request.session.who.score += 10;
-
       let index = randomWordSplit.indexOf(lowercaseGuess);
       request.session.who.underscores[index] = randomWordSplit[index];
+      randomWordSplit[index] = '';
     }
 
     response.redirect('/play');
+
+    if (randomWordSplit.indexOf('_') === -1) {
+      response.redirect('/youwin');
+    }
 
   } else if (request.body.guess === '') {
     response.redirect('/play');
@@ -120,8 +127,7 @@ server.listen(3000, function() {
 
 
 // TODO: ISSUES
-// 1a. need to set everything to lowercase
-// 1) multiples of letters do not populate
+// 1) need to post to youwin
 // 2) when word is complete it doesnt automatically redirect
 // 3) game mustache doesnt show scores
 // 4) scoreboard needs to populate
