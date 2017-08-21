@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Hey {{ username }}! Here's your challenge. You have {{ tries }} tries left.</h1>
+
+    <span class="container"></span>
+
+    <form method="post" action="/guess">
+      <input type="text" name="input" placeholder="Guess here!">
+      <input type="submit" value="Make a guess!">
+    </form>
+
+
+<!-- SIMILAR TO MESSAGES FROM TWEETERCLONE -->
+    <h3>List of guesses:</h3>
+    <ul>
+      {{ #guesses }}
+      <li>
+        <span>{{ previousGuess }}</span>
+      </li>
+      {{ /guesses }}
+    </ul>
+
+    <h3>Current score: {{ score }}</h3>
+
+  </body>
+</html>

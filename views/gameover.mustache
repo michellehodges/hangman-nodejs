@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>GAME OVER. Your score: {{ score }}.</h1>
+
+    <table>
+      {{ #scoreboard }}
+        <th>
+          <tr>{{ username }}</tr>
+        </th>
+        <td>
+          <tr>{{ score }}</tr>
+        </td>
+      {{ /scoreboard }}
+
+    <table>
+
+    <form method="post" action="/">
+      <input type="submit" value="Play again!">
+    </form>
+
+  </body>
+</html>
