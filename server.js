@@ -105,10 +105,10 @@ server.post('/guess', function(request, response) {
       randomWordSplit[index] = '';
     }
 
-    response.redirect('/play');
-
-    if (randomWordSplit.indexOf('_') === -1) {
+    if (request.session.who.underscores.indexOf('_') === -1) {
       response.redirect('/youwin');
+    } else {
+      response.redirect('/play');
     }
 
   } else if (request.body.guess === '') {
@@ -127,8 +127,7 @@ server.listen(3000, function() {
 
 
 // TODO: ISSUES
-// 1) need to post to youwin
-// 2) when word is complete it doesnt automatically redirect
+// 2) when word is complete it doesnt automatically redirect to youwin
 // 3) game mustache doesnt show scores
 // 4) scoreboard needs to populate
 // 5) need to connect css
