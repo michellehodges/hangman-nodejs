@@ -26,8 +26,9 @@ server.use(session({
 }));
 
 server.engine('mustache', mustache());
-server.set('views', './views')
+server.set('views', './views');
 server.set('view engine', 'mustache');
+server.use(express.static('views'));
 
 //GET requests
 
@@ -52,11 +53,15 @@ server.get('/play', function(request, response) {
 });
 
 server.get('/gameover', function(request, response) {
-  response.render('gameover');
+  response.render('gameover', {
+    score: request.session.who.score,
+  });
 })
 
 server.get('/youwin', function(request, response) {
-  response.render('youwin')
+  response.render('youwin', {
+    score: request.session.who.score,
+  })
 })
 
 //POST requests
@@ -127,7 +132,8 @@ server.listen(3000, function() {
 
 
 // TODO: ISSUES
-// 2) when word is complete it doesnt automatically redirect to youwin
-// 3) game mustache doesnt show scores
+// 1) Tries only goes down when the incorrect word was guessed
+// 2) need to connect css
+// 3) gameover and youwin mustache doesnt show scores
 // 4) scoreboard needs to populate
-// 5) need to connect css
+// 5) need to include level options

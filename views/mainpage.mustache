@@ -1,33 +1,35 @@
 <!doctype html>
 <html>
-  <head>
-  </head>
-  <body>
-    <h1>Hey {{ username }}! Here's your challenge. You have {{ tries }} tries left.</h1>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Just+Another+Hand|Patrick+Hand+SC" rel="stylesheet">
+</head>
+<body class="mainpage-body">
+  <h1 class="mainpage-text">Hey {{ username }}! Here's your challenge. You have {{ tries }} tries left.</h1>
 
-    <div class ="container">
-      {{ #underscores }}
-        <span>{{ . }}</span>
-      {{ /underscores }}
-    </div>
+  <div class ="underscores">
+    {{ #underscores }}
+      <span>{{ . }}</span>
+    {{ /underscores }}
+  </div>
 
-    <form method="post" action="/guess">
-      <input type="text" name="guess" placeholder="Guess here!">
-      <input type="submit" value="Make a guess!">
-    </form>
+  <form method="post" action="/guess">
+    <input type="text" name="guess" placeholder="Guess here!" class="guess-box">
+    <input type="submit" value="Make a guess!" class="guess-btn">
+  </form>
 
 
 <!-- SIMILAR TO MESSAGES FROM TWEETERCLONE -->
-    <h3>List of guesses:</h3>
-    <ol>
-      {{ #guessedLetters }}
-      <li>
-        <span>{{ guesses }}</span>
-      </li>
-      {{ /guessedLetters }}
-    </ol>
+  <h3 class="guess-list">What you've guessed so far....</h3>
+  <ul>
+    {{ #guessedLetters }}
+    <li class="guess-list">
+      <span class="list">{{ guesses }}</span>
+    </li>
+    {{ /guessedLetters }}
+  </ul>
 
-    <h3>Current score: {{ score }}</h3>
+  <h3 class="current-score">Current score: {{ score }}</h3>
 
-  </body>
+</body>
 </html>

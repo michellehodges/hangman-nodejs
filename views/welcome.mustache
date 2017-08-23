@@ -1,18 +1,20 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Just+Another+Hand|Patrick+Hand+SC" rel="stylesheet">
   </head>
-  <body>
-    <h1>Welcome to The Vünderfül Game of Hängmannen! Please enter your preferred battlename and level.</h1>
+  <body class="welcome-body">
+    <h1 class="welcome-text">Hey there! Let's play HANGMAN! Please enter your preferred battlename and level.</h1>
 
     <form method="post" action="/start">
-      <input type="text" name="newUsername" placeholder="Enter your battlename">
+      <input type="text" name="newUsername" placeholder="Enter your battlename" class="username">
       <select>
         <option name="easy" value="easy">Easy (4-6 char)</option>
         <option name="easy" value="medium">Medium (6-8 char)</option>
         <option name="easy" value="hard">Hard (8+ char)</option>
       </select>
-      <input type="submit" value="Let's play!">
+      <input type="submit" value="Let's play!" class="welcome-btn">
     </form>
 
   </body>

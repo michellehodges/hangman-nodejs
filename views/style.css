@@ -1,0 +1,166 @@
+/*font-family: 'Patrick Hand SC', cursive;
+font-family: 'Just Another Hand', cursive;*/
+
+.welcome-body {
+  background-image: url( "https://www.spreadshirt.com/image-server/v1/mp/designs/12339789,width=178,height=178/happy-stick-figure.png");
+  background-repeat: no-repeat;
+  background-position: 75em 7em;
+}
+
+.welcome-text {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 50px;
+  margin-left: 1em;
+}
+
+.welcome-btn {
+  font-family: 'Patrick Hand SC', cursive;
+  text-transform: uppercase;
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 6px 22px;
+  font-size: 16px;
+  margin-left: 2em;
+  border-radius: 5px;
+}
+
+.username {
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 20em;
+  margin-left: 37em;
+}
+
+::placeholder {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 1.5em;
+}
+
+select {
+  border-color: black;
+  margin-left: 2em;
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 1em;
+  width: 10em;
+}
+
+.mainpage-body {
+  background-image: url( "http://www.clker.com/cliparts/s/z/b/R/H/Q/stickman-worried.svg");
+  background-repeat: no-repeat;
+  background-position: 55em 0;
+}
+
+.mainpage-text {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 50px;
+  margin-left: 1em;
+}
+
+.guess-btn {
+  font-family: 'Patrick Hand SC', cursive;
+  text-transform: uppercase;
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 6px 22px;
+  font-size: 16px;
+  margin-left: 2em;
+  border-radius: 5px;
+}
+
+.underscores{
+  font-family: 'Patrick Hand SC', cursive;
+  text-transform: uppercase;
+  font-size: 2em;
+  color: red;
+  margin-left: 4em;
+}
+
+.guess-box {
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 20em;
+  margin-left: 12em;
+  margin-top: 1.5em;
+}
+
+::placeholder {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 1.5em;
+}
+
+.guess-list {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 1.5em;
+  margin-left: 5.2em;
+  list-style: none;
+}
+
+.list {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 1em;
+  list-style: none;
+}
+
+.current-score {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 2em;
+  margin-left: 3.8em;
+}
+
+.youwin-body {
+  background-image: url( "http://freedomimagingsystems.com/img/stick_figure_kicking_heels.png");
+  background-repeat: no-repeat;
+  background-position: 55em 3em;
+}
+
+.youwin-text {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 50px;
+  margin-left: 1em;
+}
+
+.btn {
+  font-family: 'Patrick Hand SC', cursive;
+  text-transform: uppercase;
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 10px 22px;
+  font-size: 16px;
+  margin-left: 3em;
+  margin-top: 1em;
+  border-radius: 1em;
+}
+
+.table {
+ font-family: 'Patrick Hand SC', cursive;
+ text-transform: uppercase;
+}
+
+.gameover-body {
+  background-image: url( "http://image.spreadshirt.com/image-server/v1/designs/11882342,width=178,height=178/hangman-stick-figure-1c.png");
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.gameover-text {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 50px;
+  margin-left: 1em;
+}
+
+.btn {
+  font-family: 'Patrick Hand SC', cursive;
+  text-transform: uppercase;
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 10px 22px;
+  font-size: 16px;
+  margin-left: 3em;
+  border-radius: 1em;
+}
