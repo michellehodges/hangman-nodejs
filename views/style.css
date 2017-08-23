@@ -164,3 +164,7 @@ select {
   margin-left: 3em;
   border-radius: 1em;
 }
+
+ul {
+  display: flex; 
+}

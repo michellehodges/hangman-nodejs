@@ -43,7 +43,7 @@ server.get('/play', function(request, response) {
       username: request.session.who.username,
       score: request.session.who.score,
       tries: request.session.who.tries,
-      guessedLetters: request.session.who.guesses,
+      guessedLetters: request.session.who.guessedLetters,
       underscores: request.session.who.underscores
       // level: request.session.who.level,
     });
@@ -56,6 +56,7 @@ server.get('/gameover', function(request, response) {
   response.render('gameover', {
     score: request.session.who.score,
   });
+  request.session.destroy();
 })
 
 server.get('/youwin', function(request, response) {
@@ -76,7 +77,7 @@ server.post('/start', function(request, response) {
       username: request.body.newUsername,
       score: 0,
       tries: 8,
-      guessedLetters: [''],
+      guessedLetters: [],
     };
 
     users.push(user);
@@ -101,6 +102,8 @@ server.post('/guess', function(request, response) {
 
   if ((request.session.who.tries > 1) && (lowercaseGuess !== '')) {
     request.session.who.tries -= 1;
+    console.log(lowercaseGuess);
+    console.log(request.session.who.guessedLetters);
     request.session.who.guessedLetters.push(lowercaseGuess);
 
     while (randomWordSplit.indexOf(lowercaseGuess) !== -1 && request.session.who.underscores.indexOf('_') > -1) {
@@ -120,7 +123,6 @@ server.post('/guess', function(request, response) {
     response.redirect('/play');
 
   } else {
-    request.session.destroy();
     response.redirect('/gameover')
   }
 })
@@ -133,7 +135,7 @@ server.listen(3000, function() {
 
 // TODO: ISSUES
 // 1) Tries only goes down when the incorrect word was guessed
-// 2) need to connect css
+// 2) when you have clicked the letter, make sure it is not available to click 
 // 3) gameover and youwin mustache doesnt show scores
 // 4) scoreboard needs to populate
 // 5) need to include level options
