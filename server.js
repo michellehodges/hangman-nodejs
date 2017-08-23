@@ -100,31 +100,29 @@ server.post('/start', function(request, response) {
 server.post('/guess', function(request, response) {
   let lowercaseGuess = request.body.guess.toLowerCase();
 
-  if ((request.session.who.tries > 1) && (lowercaseGuess !== '')) {
-    request.session.who.tries -= 1;
-    console.log(lowercaseGuess);
-    console.log(request.session.who.guessedLetters);
-    request.session.who.guessedLetters.push(lowercaseGuess);
+    if ((request.session.who.tries > 1) && (lowercaseGuess !== '') && (request.session.who.guessedLetters.indexOf(lowercaseGuess) === -1)) {
 
-    while (randomWordSplit.indexOf(lowercaseGuess) !== -1 && request.session.who.underscores.indexOf('_') > -1) {
-      request.session.who.score += 10;
-      let index = randomWordSplit.indexOf(lowercaseGuess);
-      request.session.who.underscores[index] = randomWordSplit[index];
-      randomWordSplit[index] = '';
-    }
+      while ((randomWordSplit.indexOf(lowercaseGuess) !== -1) && (request.session.who.underscores.indexOf('_') !== -1)) {
+        request.session.who.guessedLetters.push(lowercaseGuess);
+        request.session.who.score += 10;
+        let index = randomWordSplit.indexOf(lowercaseGuess);
+        request.session.who.underscores[index] = randomWordSplit[index];
+        randomWordSplit[index] = '';
+      }
 
-    if (request.session.who.underscores.indexOf('_') === -1) {
-      response.redirect('/youwin');
-    } else {
-      response.redirect('/play');
-    }
+      if (randomWordSplit.indexOf(lowercaseGuess) === -1) {
+        request.session.who.tries -= 1;
+        if (request.session.who.tries === 0) {
+        response.redirect('/gameover')
+        }
+      }
 
-  } else if (request.body.guess === '') {
-    response.redirect('/play');
+      if (request.session.who.underscores.indexOf('_') === -1) {
+        response.redirect('/youwin');
+      }
 
-  } else {
-    response.redirect('/gameover')
   }
+    response.redirect('/play');
 })
 
 
@@ -135,7 +133,7 @@ server.listen(3000, function() {
 
 // TODO: ISSUES
 // 1) Tries only goes down when the incorrect word was guessed
-// 2) when you have clicked the letter, make sure it is not available to click 
+// 2) when you have clicked the letter, make sure it is not available to click again.
 // 3) gameover and youwin mustache doesnt show scores
 // 4) scoreboard needs to populate
 // 5) need to include level options
