@@ -7,12 +7,12 @@
   <body class="welcome-body">
     <h1 class="welcome-text">Hey there! Let's play HANGMAN! Please enter your preferred battlename and level.</h1>
 
-    <form method="post" action="/start">
+    <form method="post" action="/start" id="start">
       <input type="text" name="newUsername" placeholder="Enter your battlename" class="username">
-      <select>
+      <select name="level" form="start">
         <option name="easy" value="easy">Easy (4-6 char)</option>
-        <option name="easy" value="medium">Medium (6-8 char)</option>
-        <option name="easy" value="hard">Hard (8+ char)</option>
+        <option name="medium" value="medium">Medium (6-8 char)</option>
+        <option name="hard" value="hard">Hard (8+ char)</option>
       </select>
       <input type="submit" value="Let's play!" class="welcome-btn">
     </form>

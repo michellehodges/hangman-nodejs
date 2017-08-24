@@ -8,13 +8,19 @@
   <h1 class="youwin-text">YOU WIN! Your score: {{ score }}.</h1>
 
   <table>
-    {{ #scoreboard }}
       <tr>
-        <th class="table">{{ username }}</th>
-        <th class="table">{{ score }}</th>
+        <th class="table">Battlename</th>
+        <th class="table">Score</th>
       </tr>
-    {{ /scoreboard }}
-  <table>
+      <tr>
+      {{ #username }}
+        <td class="table">{{ username }}</td>
+      {{ /username }}
+      {{ #score }}
+      <td class="table">{{ score }}</td>
+      {{ /score }}
+      </tr>
+  </table>
 
   <form method="post" action="/">
     <input type="submit" value="Play again!" class="btn">

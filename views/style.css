@@ -166,5 +166,10 @@ select {
 }
 
 ul {
-  display: flex; 
+  display: flex;
+}
+
+table {
+  margin-left: 1.6em;
+  font-size: 2em; 
 }
