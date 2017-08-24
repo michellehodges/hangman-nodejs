@@ -120,20 +120,20 @@ server.post('/start', function(request, response) {
 })
 
 server.post('/guess', function(request, response) {
-  //GUYS, super cool thing mike taught me about input validation.
   let lowercaseGuess = request.body.guess.toLowerCase()[0];
+  let lettersOnly = /^[A-Za-z]+$/;
 
-    if ((request.session.who.tries > 0) && (lowercaseGuess !== '') && (request.session.who.guessedLetters.indexOf(lowercaseGuess) === -1)) {
+    if ((request.session.who.tries > 0) && (lowercaseGuess !== '') && (lowercaseGuess != undefined) && (request.session.who.guessedLetters.indexOf(lowercaseGuess) === -1) && (lowercaseGuess.match(lettersOnly))) {
 
       request.session.who.guessedLetters.push(lowercaseGuess);
-      if (randomWordSplit.indexOf(lowercaseGuess) === -1) {
+      if ((randomWordSplit.indexOf(lowercaseGuess) === -1) && (lowercaseGuess.match(lettersOnly))) {
         request.session.who.tries -= 1;
         if (request.session.who.tries === 0) {
         response.redirect('/gameover')
         }
       }
 
-      while ((randomWordSplit.indexOf(lowercaseGuess) !== -1) && (request.session.who.underscores.indexOf('_') !== -1)) {
+      while ((randomWordSplit.indexOf(lowercaseGuess) !== -1) && (request.session.who.underscores.indexOf('_') !== -1) && (lowercaseGuess.match(lettersOnly))) {
 
         request.session.who.score += 10;
         let index = randomWordSplit.indexOf(lowercaseGuess);
